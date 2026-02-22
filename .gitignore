@@ -1,0 +1,18 @@
+# Build
+build/
+out/
+*.log
+
+# Simulation
+sim_build*/
+*.vcd
+*.fst
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editors
+.DS_Store
