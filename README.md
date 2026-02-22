@@ -3,8 +3,9 @@
 Minimal 5-stage RISC-V core in **Bluespec** with a tiny **C** ISS and a **Python** test harness. The focus is clarity and traceable correctness, not peak performance. This repo includes a custom SIMD dot-product instruction and a simple assembler for a small test subset.
 
 ## What this is
-- 5-stage pipeline skeleton (IF/ID/EX/MEM/WB) in Bluespec.
+- 5-stage pipeline scaffold (IF/ID/EX/MEM/WB) in Bluespec.
 - Scalar RV32I subset plus one SIMD op: 4-lane dot product.
+- Basic load-use stall and simple forwarding paths.
 - C-based ISS for cross-checking and test goldens.
 - Python tests that assemble a tiny program and verify outputs.
 
@@ -38,7 +39,7 @@ python -m pytest -q
 If `gcc` is missing, tests will skip the ISS integration test.
 
 ## Status
-This is a minimal, readable baseline. It is intentionally incomplete: the pipeline is a skeleton and needs functional unit completion, hazard handling, and memory integration.
+This is a minimal, readable baseline. It is intentionally incomplete: the pipeline still needs fuller functional unit coverage, deeper hazard handling, and robust memory integration.
 
 ## License
 MIT

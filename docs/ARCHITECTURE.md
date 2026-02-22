@@ -8,6 +8,6 @@
 5. WB: writeback to register file
 
 ## Notes
-- The Bluespec RTL is a readable scaffold.
-- Hazard handling is not yet implemented.
-- The ISS is the reference for functional behavior.
+- The Bluespec RTL is intentionally small and readable.
+- Basic load-use stall and EX/MEM + MEM/WB forwarding are implemented.
+- The ISS remains the reference for functional behavior.
