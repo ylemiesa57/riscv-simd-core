@@ -16,3 +16,6 @@ venv/
 
 # Editors
 .DS_Store
+
+# Local artifacts
+*.hex
