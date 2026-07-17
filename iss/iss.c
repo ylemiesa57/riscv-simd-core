@@ -93,6 +93,10 @@ static void load_hex(const char *path) {
   while (fgets(line, sizeof(line), f)) {
     uint32_t word = 0;
     if (sscanf(line, "%x", &word) == 1) {
+      if (addr >= MEM_WORDS) {
+        fprintf(stderr, "load_hex: program exceeds %d words, truncating\n", MEM_WORDS);
+        break;
+      }
       imem[addr++] = word;
     }
   }
