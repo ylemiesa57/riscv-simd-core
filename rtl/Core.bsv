@@ -42,7 +42,7 @@ module mkCore(CoreIfc);
   endmethod
 
   method Word readData(Addr addr);
-    return dmem[addr[11:2]].read;
+    return dmem[addr[11:2]];
   endmethod
 
   method Action loadVec(Bit#(3) idx, Vector#(4, Word) data);
@@ -69,8 +69,8 @@ module mkCore(CoreIfc);
     Addr branchTarget = idex.pc + idex.imm;
 
     if (idex.isVdot) begin
-      Vector#(4, Word) v1 = vrf.read(idex.rs1Idx[2:0]);
-      Vector#(4, Word) v2 = vrf.read(idex.rs2Idx[2:0]);
+      Vector#(4, Word) v1 = vrf.read1(idex.rs1Idx[2:0]);
+      Vector#(4, Word) v2 = vrf.read2(idex.rs2Idx[2:0]);
       Word acc = 0;
       for (Integer i = 0; i < 4; i = i + 1) begin
         acc = acc + (v1[i] * v2[i]);
@@ -111,7 +111,7 @@ module mkCore(CoreIfc);
 
     // --- IF stage ---
     if (!hazard) begin
-      let instr = imem[pc[11:2]].read;
+      let instr = imem[pc[11:2]];
       if (takeBranch) begin
         ifid <= IFID { instr: 0, pc: 0, rs1Idx: 0, rs2Idx: 0 };
       end else begin
@@ -205,7 +205,7 @@ module mkCore(CoreIfc);
     if (exmem.memWrite) begin
       dmem[exmem.aluResult[11:2]] <= exmem.rs2Val;
     end
-    Word memData = dmem[exmem.aluResult[11:2]].read;
+    Word memData = dmem[exmem.aluResult[11:2]];
 
     memwb <= MEMWB {
       instr: exmem.instr,

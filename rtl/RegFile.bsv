@@ -14,13 +14,11 @@ module mkRegFile(RegFileIfc);
   Vector#(32, Reg#(Word)) regs <- replicateM(mkReg(0));
 
   method Word read1(Bit#(5) addr);
-    if (addr == 0) return 0;
-    return regs[addr].read;
+    return (addr == 0) ? 0 : regs[addr];
   endmethod
 
   method Word read2(Bit#(5) addr);
-    if (addr == 0) return 0;
-    return regs[addr].read;
+    return (addr == 0) ? 0 : regs[addr];
   endmethod
 
   method Action write(Bit#(5) addr, Word data);
