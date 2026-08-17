@@ -21,13 +21,13 @@ def test_demo_program_runs():
         pytest.skip("gcc not available")
 
     # assemble
-    subprocess.check_call(["python", str(ASM_TOOL), str(ASM), str(HEX)])
+    subprocess.check_call(["python", str(ASM_TOOL), str(ASM), str(HEX)], timeout=10)
 
     # build ISS
-    subprocess.check_call(["make"], cwd=str(ISS_DIR))
+    subprocess.check_call(["make"], cwd=str(ISS_DIR), timeout=30)
 
     # run
-    out = subprocess.check_output([str(ISS_BIN), str(HEX)]).decode("utf-8")
+    out = subprocess.check_output([str(ISS_BIN), str(HEX)], timeout=10).decode("utf-8")
     lines = {k: int(v) for k, v in (line.split("=") for line in out.strip().splitlines())}
 
     # v1=[1,2,3,4], v2=[2,4,6,8] => dot = 60
@@ -45,7 +45,7 @@ def test_oversized_program_is_truncated_not_overflowed(tmp_path):
         import pytest
         pytest.skip("gcc not available")
 
-    subprocess.check_call(["make"], cwd=str(ISS_DIR))
+    subprocess.check_call(["make"], cwd=str(ISS_DIR), timeout=30)
 
     # MEM_WORDS is 4096; write well past that so the old code (no bounds
     # check) would have written outside imem[] into dmem[]/regs[]/vregs[].
